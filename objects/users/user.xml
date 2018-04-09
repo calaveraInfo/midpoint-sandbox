@@ -1,0 +1,26 @@
+<user 
+	xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3" 
+	xmlns:apti="http://midpoint.evolveum.com/xml/ns/public/common/api-types-3" 
+	xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3" 
+	xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3" 
+	xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3" 
+	xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3" 
+	xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3" 
+	xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	oid="1ec0e0f1-4408-4c3a-82d0-f31db8b9672b">
+      <name>user</name>
+      <parentOrgRef oid="c0440ce4-d45c-40fc-96e7-c2ceafae154e" relation="org:default" type="c:OrgType"/>
+      <assignment>
+         <targetRef oid="c0440ce4-d45c-40fc-96e7-c2ceafae154e" relation="org:default" type="c:OrgType"/>
+         <activation>
+            <effectiveStatus>enabled</effectiveStatus>
+         </activation>
+      </assignment>
+      <activation>
+         <effectiveStatus>enabled</effectiveStatus>
+      </activation>
+      <iteration>0</iteration>
+      <iterationToken/>
+      <roleMembershipRef oid="c0440ce4-d45c-40fc-96e7-c2ceafae154e" relation="org:default" type="c:OrgType"/>
+   </user>
