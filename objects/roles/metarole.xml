@@ -1,0 +1,31 @@
+<role
+	xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3" 
+	xmlns:apti="http://midpoint.evolveum.com/xml/ns/public/common/api-types-3" 
+	xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3" 
+	xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3" 
+	xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3" 
+	xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3" 
+	xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3" 
+	xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	oid="18a4e71f-594a-4272-843a-f4868b47c66c">
+      <name>metarole</name>
+      <activation>
+         <effectiveStatus>enabled</effectiveStatus>
+      </activation>
+      <iteration>0</iteration>
+      <iterationToken/>
+      <inducement>
+         <targetRef oid="f60b0b1e-c056-491c-b446-cfc84ead1003" relation="org:default" type="c:ObjectType"/>
+         <order>3</order>
+      </inducement>
+      <inducement>
+         <targetRef oid="a74db52f-2fd9-49e8-b374-66962a1e4872" relation="org:default" type="c:ObjectType"/>
+         <orderConstraint>
+            <orderMin>0</orderMin>
+            <orderMax>unbounded</orderMax>
+            <resetOrder>1</resetOrder>
+         </orderConstraint>
+         <focusType>OrgType</focusType>
+      </inducement>
+   </role>
