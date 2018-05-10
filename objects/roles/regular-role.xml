@@ -1,0 +1,27 @@
+<role
+	xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3" 
+	xmlns:apti="http://midpoint.evolveum.com/xml/ns/public/common/api-types-3" 
+	xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3" 
+	xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3" 
+	xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3" 
+	xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3" 
+	xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3" 
+	xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	oid="2e48e9b6-cde8-4d16-b45f-d0b69b9e97c3">
+   <name>regular-role</name>
+   <assignment>
+      <targetRef oid="3131a935-263d-43c7-b954-c0c5f83f8b61"
+                 relation="org:default"
+                 type="c:RoleType"><!-- regular-metarole --></targetRef>
+      <activation>
+         <effectiveStatus>enabled</effectiveStatus>
+      </activation>
+   </assignment>
+   <activation>
+      <effectiveStatus>enabled</effectiveStatus>
+   </activation>
+   <roleMembershipRef oid="3131a935-263d-43c7-b954-c0c5f83f8b61"
+                      relation="org:default"
+                      type="c:RoleType"><!-- regular-metarole --></roleMembershipRef>
+</role>

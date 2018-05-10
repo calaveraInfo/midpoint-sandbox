@@ -1,0 +1,44 @@
+<role
+	xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3" 
+	xmlns:apti="http://midpoint.evolveum.com/xml/ns/public/common/api-types-3" 
+	xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3" 
+	xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3" 
+	xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3" 
+	xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3" 
+	xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3" 
+	xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	oid="3131a935-263d-43c7-b954-c0c5f83f8b61">
+      <name>regular-metarole</name>
+      <activation>
+         <effectiveStatus>enabled</effectiveStatus>
+      </activation>
+      
+      <inducement>
+      	 <!-- implicitly first order inducement works -->
+         <targetRef oid="883d9d99-b903-4fc5-b62d-4e83e01edfda" relation="org:default" type="c:ObjectType"/>
+         <focusType>RoleType</focusType>
+      </inducement>
+      
+      <inducement>
+         <targetRef oid="883d9d99-b903-4fc5-b62d-4e83e01edfda" relation="org:default" type="c:ObjectType"/>
+         
+         <!-- This don't work -->
+         <orderConstraint>
+            <order>2</order>
+         </orderConstraint>
+         
+         <!-- 
+         This variant works ok:
+         <order>2</order>
+         
+         This also don't work:
+         <orderConstraint>
+            <orderMin>1</orderMin>
+            <orderMax>unbounded</orderMax>
+         </orderConstraint>
+          -->
+         <focusType>UserType</focusType>
+      </inducement>
+      
+   </role>
