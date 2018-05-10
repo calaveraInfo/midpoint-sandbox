@@ -6,6 +6,10 @@ Higher order inducement does not work for `targetRef` if it is set up using
 `orderConstraint` configuration element instead of simple
 `order`.
 
+Basic diagram:
+
+`regular-metarole <---assignment--- regular-role <---assignment--- user`
+
 Inducements in "regular-metarole" defines following behavior:
 
 - Role "regular-role" should have indirectly assigned "regular-role-companion": This works OK.
