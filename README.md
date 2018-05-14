@@ -10,15 +10,15 @@ Basic diagram:
 
 `regular-metarole <---assignment--- regular-role <---assignment--- user`
 
-Inducements in "regular-metarole" defines following behavior:
+Inducements in "regular-metarole" defines following behavior (verification done on screen "View all assignments" available in user profile):
 
 - Role "regular-role" should have indirectly assigned "regular-role-companion": This works OK.
 - User "user" should also have indirectly assigned "regular-role-companion": This don't work.
 
 This bug holds even for secondary higher order inducement
-(inducement of role which is itself induced, because higher order inducement surprisingly
+(inducement of role which is itself induced, which is possible because higher order inducement surprisingly
 works for OrgTypes) as seen in
-"orderConstraint-induced-role" which defines following behavior:
+"orderConstraint-induced-role" which defines following behavior (verification done by focusMapping serving as a marker):
 
 - Secondary first order inducement: organization "leaf" should have it's
     "locality" set to "xxx". This works OK.
