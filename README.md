@@ -1,26 +1,13 @@
-# Possible bugs
+# Higher order inducement problems
 
-## Higher order inducement problem
 
-Higher order inducement does not work for `targetRef` if it is set up using
-`orderConstraint` configuration element instead of simple
-`order`.
+## Secondary higher order inducement does not work
 
-Basic diagram:
+Diagram of relevant roles
 
-`regular-metarole <---assignment--- regular-role <---assignment--- user`
+`orderConstraint-induced-role <---indirectly assigned by higher order inducement--- leaf (org) <---assignment--- user`
 
-Inducements in "regular-metarole" defines following behavior (verification done on screen "View all assignments" available in user profile):
+orderConstraint-induced-role defines two inducements:
 
-- Role "regular-role" should have indirectly assigned "regular-role-companion": This works OK.
-- User "user" should also have indirectly assigned "regular-role-companion": This don't work.
-
-This bug holds even for secondary higher order inducement
-(inducement of role which is itself induced, which is possible because higher order inducement surprisingly
-works for OrgTypes) as seen in
-"orderConstraint-induced-role" which defines following behavior (verification done by focusMapping serving as a marker):
-
-- Secondary first order inducement: organization "leaf" should have it's
-    "locality" set to "xxx". This works OK.
-- Secondary higher order inducement: user "user" should have it's
-    "locality" set to "yyy". This does not work.
+- First order inducement with focus mapping that shoud set "locality" attribute of organization "leaf" to "zzz". This works.
+- Higher order inducement with targetRef pointing to "other-role" and also focus mapping that should set "locality" attribute of user "user" to "yyy". Both focus mapping and role inducement (as seen in roleMembershipRef) does not work.

@@ -8,22 +8,9 @@
 	xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3" 
 	xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	oid="3131a935-263d-43c7-b954-c0c5f83f8b61">
-      <name>regular-metarole</name>
-      <activation>
-         <effectiveStatus>enabled</effectiveStatus>
-      </activation>
-      
-      <inducement>
-         <targetRef oid="883d9d99-b903-4fc5-b62d-4e83e01edfda" relation="org:default" type="c:ObjectType"/>
-         <orderConstraint>
-            <order>2</order>
-            <!-- 
-            <relation>org:owner</relation>
-             -->
-            <resetOrder>1</resetOrder>
-         </orderConstraint>
-         <focusType>UserType</focusType>
-      </inducement>
-      
-   </role>
+	oid="0c1e902b-bf62-465b-8a78-49ecaf057a81">
+   <name>other-role</name>
+   <activation>
+      <effectiveStatus>enabled</effectiveStatus>
+   </activation>
+</role>

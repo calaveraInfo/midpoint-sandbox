@@ -17,17 +17,21 @@
             <effectiveStatus>enabled</effectiveStatus>
          </activation>
       </assignment>
+      <!--
       <assignment>
          <targetRef oid="2e48e9b6-cde8-4d16-b45f-d0b69b9e97c3" relation="org:default" type="c:RoleType"/>
          <activation>
             <effectiveStatus>enabled</effectiveStatus>
          </activation>
       </assignment>
+       -->
       <activation>
          <effectiveStatus>enabled</effectiveStatus>
       </activation>
       <iteration>0</iteration>
       <iterationToken/>
       <roleMembershipRef oid="c0440ce4-d45c-40fc-96e7-c2ceafae154e" relation="org:default" type="c:OrgType"/>
+      <!-- 
       <roleMembershipRef oid="2e48e9b6-cde8-4d16-b45f-d0b69b9e97c3" relation="org:default" type="c:RoleType"/>
+       -->
    </user>

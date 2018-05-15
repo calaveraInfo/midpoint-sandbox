@@ -9,8 +9,25 @@
 	xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	oid="883d9d99-b903-4fc5-b62d-4e83e01edfda">
-      <name>regular-role-companion</name>
-      <activation>
-         <effectiveStatus>enabled</effectiveStatus>
-      </activation>
-   </role>
+   <name>regular-role-companion</name>
+   <activation>
+      <effectiveStatus>enabled</effectiveStatus>
+   </activation>
+	<inducement>
+		<focusMappings>
+			<mapping>
+				<expression>
+					<script>
+						<code>
+							'xxx'
+						</code>
+					</script>
+				</expression>
+				<target>
+					<path>locality</path>
+				</target>
+			</mapping>
+		</focusMappings>
+		<focusType>UserType</focusType>
+	</inducement>
+</role>

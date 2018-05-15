@@ -19,7 +19,7 @@
 				<expression>
 					<script>
 						<code>
-							'xxx'
+							'zzz'
 						</code>
 					</script>
 				</expression>
@@ -30,6 +30,7 @@
 		</focusMappings>
 	</inducement>
 	<inducement>
+		<targetRef oid="0c1e902b-bf62-465b-8a78-49ecaf057a81" relation="org:default" type="c:ObjectType"/>
 		<focusMappings>
 			<mapping>
 				<expression>
@@ -45,6 +46,15 @@
 			</mapping>
 		</focusMappings>
 		<order>2</order>
+		<!-- 
+		This also doesn't work
+		<orderConstraint>
+			<order>2</order>
+			<resetOrder>1</resetOrder>
+		</orderConstraint>
+		 -->
+		<!-- 
 		<focusType>UserType</focusType>
+		 -->
 	</inducement>
 </role>
