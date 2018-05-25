@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="blank-report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f49a4cc-5922-498a-92ce-62ae9f36c157">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<subDataset name="accountsDataset" uuid="098a6721-3939-4669-8923-652343cfd916">
+		<parameter name="userOid" class="java.util.String"/>
+		<queryString language="mql">
+			<![CDATA[<code>
+	import com.evolveum.midpoint.xml.ns._public.common.common_3.UserType;
+	midpoint
+		.getObject(UserType.class, userOid)
+		.linkRef
+		.collect({link -> midpoint.resolveReference(link).resourceRef})
+		.collect({resourceRef -> midpoint.resolveReference(resourceRef)})
+</code>]]>
+		</queryString>
+		<field name="name" class="java.lang.String"/>
+	</subDataset>
+	<queryString language="mql">
+		<![CDATA[<filter>
+    <type>
+        <type>UserType</type>
+    </type>
+</filter>]]>
+	</queryString>
+	<field name="oid" class="java.lang.String"/>
+	<variable name="total" class="java.lang.Integer" resetType="None"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="130" height="19" uuid="75e65357-12d5-4130-8989-bdcd20600ddc"/>
+				<textFieldExpression><![CDATA[$F{oid}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="130" y="0" width="410" height="19" uuid="e7f668f3-9664-4660-8b16-0d25df7d3e2d"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Horizontal">
+					<datasetRun subDataset="accountsDataset" uuid="6e0ffc65-89ac-4f69-80d6-3604213eff90">
+						<parametersMapExpression><![CDATA[new HashMap($P{REPORT_PARAMETERS_MAP})]]></parametersMapExpression>
+						<datasetParameter name="userOid">
+							<datasetParameterExpression><![CDATA[$F{oid}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="19" width="410">
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="410" height="19" uuid="9f4894f3-4dac-4813-80cf-ad970836c0ea"/>
+							<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
