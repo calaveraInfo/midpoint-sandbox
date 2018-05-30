@@ -2,19 +2,53 @@
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="blank-report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f49a4cc-5922-498a-92ce-62ae9f36c157">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
 	<subDataset name="accountsDataset" uuid="098a6721-3939-4669-8923-652343cfd916">
 		<parameter name="userOid" class="java.util.String"/>
 		<queryString language="mql">
 			<![CDATA[<code>
 	import com.evolveum.midpoint.xml.ns._public.common.common_3.UserType;
-	midpoint
+	return midpoint
 		.getObject(UserType.class, userOid)
 		.linkRef
 		.collect({link -> midpoint.resolveReference(link).resourceRef})
 		.collect({resourceRef -> midpoint.resolveReference(resourceRef)})
+		.grep({resource -> "com.evolveum.polygon.connector.csv.CsvConnector".equals(midpoint.resolveReference(resource.connectorRef).connectorType)});
 </code>]]>
 		</queryString>
 		<field name="name" class="java.lang.String"/>
+		<variable name="subTotal" class="java.lang.Integer">
+			<variableExpression><![CDATA[$V{REPORT_COUNT}]]></variableExpression>
+		</variable>
+		<variable name="hasKeys" class="java.lang.Integer">
+			<variableExpression><![CDATA[$V{REPORT_COUNT} > 0 ? 1 : 0]]></variableExpression>
+		</variable>
 	</subDataset>
 	<queryString language="mql">
 		<![CDATA[<filter>
@@ -24,52 +58,78 @@
 </filter>]]>
 	</queryString>
 	<field name="oid" class="java.lang.String"/>
-	<variable name="total" class="java.lang.Integer" resetType="None"/>
+	<field name="name" class="java.lang.String"/>
+	<variable name="total" class="java.lang.Integer" calculation="System"/>
+	<variable name="managedUsers" class="java.lang.Integer" calculation="System"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="35" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="130" height="19" uuid="75e65357-12d5-4130-8989-bdcd20600ddc"/>
-				<textFieldExpression><![CDATA[$F{oid}]]></textFieldExpression>
+				<reportElement x="0" y="0" width="560" height="30" uuid="8ef41a4d-e78c-425f-89b5-6971330ff62d"/>
+				<textElement>
+					<font fontName="Serif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Report distribuce klíčů na koncové systémy pro jednotlivé uživatele"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="560" height="19" uuid="75e65357-12d5-4130-8989-bdcd20600ddc"/>
+				<textFieldExpression><![CDATA[$F{name} + " má přístup na tyto systémy: "]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="130" y="0" width="410" height="19" uuid="e7f668f3-9664-4660-8b16-0d25df7d3e2d"/>
-				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Horizontal">
-					<datasetRun subDataset="accountsDataset" uuid="6e0ffc65-89ac-4f69-80d6-3604213eff90">
+				<reportElement x="0" y="19" width="560" height="40" uuid="8337bd9b-0dd7-4ff2-a274-820125763509">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="accountsDataset" uuid="80a6a3f4-e704-4234-a886-3ed857404b09">
 						<parametersMapExpression><![CDATA[new HashMap($P{REPORT_PARAMETERS_MAP})]]></parametersMapExpression>
 						<datasetParameter name="userOid">
 							<datasetParameterExpression><![CDATA[$F{oid}]]></datasetParameterExpression>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						<returnValue fromVariable="subTotal" toVariable="total" calculation="Sum"/>
+						<returnValue fromVariable="hasKeys" toVariable="managedUsers" calculation="Sum"/>
 					</datasetRun>
-					<jr:listContents height="19" width="410">
-						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-							<reportElement x="0" y="0" width="410" height="19" uuid="9f4894f3-4dac-4813-80cf-ad970836c0ea"/>
-							<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
-						</textField>
-					</jr:listContents>
-				</jr:list>
+					<jr:column width="560" uuid="4b1a0ae0-8c2d-4291-abc9-2c661fe2b908">
+						<jr:tableFooter style="Table_TH" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="560" height="20" uuid="127b6c28-8326-4a64-bad5-b8cfce251e05"/>
+								<textFieldExpression><![CDATA["Celkově: " + $V{subTotal}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:detailCell style="Table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="560" height="20" uuid="39e82a8a-d503-4ec2-ad5f-e015d14be62b"/>
+								<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
 			</componentElement>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="66" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="48" width="560" height="18" uuid="6da83a34-e5dc-48ec-a1c4-7fbbf8d1ff60"/>
+				<textFieldExpression><![CDATA["Celkový počet účtů zpřístupněných klíči:" + $V{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="29" width="560" height="19" uuid="7f87bbe1-8618-4f4b-8e32-f33e3f4269cd"/>
+				<textFieldExpression><![CDATA["Celkový počet uživatelů s alespoň jedním spravovaným účtem: " + $V{managedUsers}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="10" width="560" height="19" uuid="e0a359b0-f92e-41ea-ac74-0df9624f61a0"/>
+				<textFieldExpression><![CDATA["Celkový počet evidovaných uživatelů: " + $V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

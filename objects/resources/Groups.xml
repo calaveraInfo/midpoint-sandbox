@@ -1,0 +1,239 @@
+<resource xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+          xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+          xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+          xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+          xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+          xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+          xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+          oid="6a2a849e-e55f-44aa-9a0c-4dd83cc01d10">
+   <name>Groups</name>
+   <operationalState>
+      <lastAvailabilityStatus>up</lastAvailabilityStatus>
+   </operationalState>
+   <connectorRef oid="a71c7975-3556-4bc3-8f54-4cfc67931258"
+                 relation="org:default"
+                 type="c:ConnectorType"/>
+   <connectorConfiguration xmlns:icfc="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/connector-schema-3">
+      <icfc:configurationProperties xmlns:gen872="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/bundle/com.evolveum.polygon.connector-csv/com.evolveum.polygon.connector.csv.CsvConnector">
+         <gen872:filePath>/home/calavera/ami/tmp/groups.csv</gen872:filePath>
+         <gen872:ignoreEmptyLines>true</gen872:ignoreEmptyLines>
+         <gen872:readOnly>false</gen872:readOnly>
+         <gen872:fieldDelimiter>,</gen872:fieldDelimiter>
+         <gen872:quote>"</gen872:quote>
+         <gen872:headerExists>true</gen872:headerExists>
+         <gen872:ignoreIdentifierCase>false</gen872:ignoreIdentifierCase>
+         <gen872:nameAttribute>NAME</gen872:nameAttribute>
+         <gen872:uniqueAttribute>GROUPID</gen872:uniqueAttribute>
+      </icfc:configurationProperties>
+   </connectorConfiguration>
+   <schema>
+      <cachingMetadata>
+         <retrievalTimestamp>2018-05-28T11:23:05.226+02:00</retrievalTimestamp>
+         <serialNumber>a4775ad967c14696-6603614fdbf75b1b</serialNumber>
+      </cachingMetadata>
+      <definition>
+         <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                     xmlns:a="http://prism.evolveum.com/xml/ns/public/annotation-3"
+                     xmlns:tns="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+                     xmlns:ra="http://midpoint.evolveum.com/xml/ns/public/resource/annotation-3"
+                     elementFormDefault="qualified"
+                     targetNamespace="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3">
+            <xsd:import namespace="http://prism.evolveum.com/xml/ns/public/annotation-3"/>
+            <xsd:import namespace="http://midpoint.evolveum.com/xml/ns/public/resource/annotation-3"/>
+            <xsd:complexType name="AccountObjectClass">
+               <xsd:annotation>
+                  <xsd:appinfo>
+                     <ra:resourceObject/>
+                     <ra:identifier>ri:GROUPID</ra:identifier>
+                     <ra:secondaryIdentifier>ri:NAME</ra:secondaryIdentifier>
+                     <ra:displayNameAttribute>ri:NAME</ra:displayNameAttribute>
+                     <ra:namingAttribute>ri:NAME</ra:namingAttribute>
+                     <ra:nativeObjectClass>__ACCOUNT__</ra:nativeObjectClass>
+                     <ra:kind>account</ra:kind>
+                     <ra:default>true</ra:default>
+                  </xsd:appinfo>
+               </xsd:annotation>
+               <xsd:sequence>
+                  <xsd:element name="GROUPID" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>100</a:displayOrder>
+                           <ra:nativeAttributeName>GROUPID</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>GROUPID</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="PARENT" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>130</a:displayOrder>
+                           <ra:nativeAttributeName>PARENT</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>PARENT</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="NAME" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>110</a:displayOrder>
+                           <ra:nativeAttributeName>NAME</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>__NAME__</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="LEVEL" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>140</a:displayOrder>
+                           <ra:nativeAttributeName>LEVEL</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>LEVEL</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:schema>
+      </definition>
+   </schema>
+   <schemaHandling>
+      <objectType id="1">
+         <kind>account</kind>
+         <default>true</default>
+         <objectClass>ri:AccountObjectClass</objectClass>
+         <attribute id="2">
+            <c:ref>ri:GROUPID</c:ref>
+            <tolerant>false</tolerant>
+            <exclusiveStrong>false</exclusiveStrong>
+            <outbound>
+               <authoritative>true</authoritative>
+               <strength>strong</strength>
+               <source>
+                  <c:path>$focus/name</c:path>
+               </source>
+            </outbound>
+            <inbound id="3">
+               <authoritative>true</authoritative>
+               <exclusive>false</exclusive>
+               <strength>normal</strength>
+               <target>
+                  <c:path>$focus/name</c:path>
+               </target>
+            </inbound>
+         </attribute>
+         <attribute id="4">
+            <c:ref>ri:NAME</c:ref>
+            <tolerant>true</tolerant>
+            <exclusiveStrong>false</exclusiveStrong>
+            <inbound id="7">
+               <authoritative>true</authoritative>
+               <exclusive>false</exclusive>
+               <strength>normal</strength>
+               <target>
+                  <c:path>$focus/displayName</c:path>
+               </target>
+            </inbound>
+         </attribute>
+         <attribute id="5">
+            <c:ref>ri:LEVEL</c:ref>
+            <tolerant>true</tolerant>
+            <exclusiveStrong>false</exclusiveStrong>
+            <inbound id="8">
+               <authoritative>true</authoritative>
+               <exclusive>false</exclusive>
+               <strength>normal</strength>
+               <target>
+                  <c:path>$focus/displayOrder</c:path>
+               </target>
+            </inbound>
+         </attribute>
+         <attribute id="6">
+            <c:ref>ri:PARENT</c:ref>
+            <tolerant>true</tolerant>
+            <exclusiveStrong>false</exclusiveStrong>
+            <inbound id="9">
+               <authoritative>true</authoritative>
+               <exclusive>false</exclusive>
+               <strength>normal</strength>
+               <target>
+                  <c:path>$focus/riskLevel</c:path>
+               </target>
+            </inbound>
+         </attribute>
+      </objectType>
+   </schemaHandling>
+   <capabilities>
+      <cachingMetadata>
+         <retrievalTimestamp>2018-05-28T11:23:05.225+02:00</retrievalTimestamp>
+         <serialNumber>ca96d84d247ba3c2-7f735132e36426a7</serialNumber>
+      </cachingMetadata>
+      <native xmlns:cap="http://midpoint.evolveum.com/xml/ns/public/resource/capabilities-3"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:type="c:CapabilityCollectionType">
+         <cap:schema/>
+         <cap:liveSync/>
+         <cap:testConnection/>
+         <cap:create/>
+         <cap:read/>
+         <cap:update/>
+         <cap:delete/>
+         <cap:script>
+            <cap:host>
+               <cap:type>connector</cap:type>
+            </cap:host>
+         </cap:script>
+         <cap:addRemoveAttributeValues/>
+      </native>
+   </capabilities>
+   <synchronization>
+      <objectSynchronization>
+         <objectClass>AccountObjectClass</objectClass>
+         <focusType>c:OrgType</focusType>
+         <enabled>true</enabled>
+         <correlation>
+            <q:equal>
+               <q:path>c:name</q:path>
+               <expression xmlns="">
+                  <path>$account/attributes/icfs:uid</path>
+               </expression>
+            </q:equal>
+         </correlation>
+         <reconcile>false</reconcile>
+         <reaction>
+            <situation>unmatched</situation>
+            <reconcile>false</reconcile>
+            <objectTemplateRef oid="e711b8f7-e594-4112-8d60-7e9c2b197d71"
+                               relation="org:default"
+                               type="c:ObjectTemplateType">
+               <targetName>Hierarchy template</targetName>
+            </objectTemplateRef>
+            <action>
+               <handlerUri>http://midpoint.evolveum.com/xml/ns/public/model/action-3#addFocus</handlerUri>
+            </action>
+         </reaction>
+         <reaction>
+            <situation>unlinked</situation>
+            <reconcile>false</reconcile>
+            <objectTemplateRef oid="e711b8f7-e594-4112-8d60-7e9c2b197d71"
+                               relation="org:default"
+                               type="c:ObjectTemplateType">
+               <targetName>Hierarchy template</targetName>
+            </objectTemplateRef>
+            <action>
+               <handlerUri>http://midpoint.evolveum.com/xml/ns/public/model/action-3#link</handlerUri>
+            </action>
+         </reaction>
+         <reaction>
+            <situation>linked</situation>
+            <reconcile>false</reconcile>
+            <objectTemplateRef oid="e711b8f7-e594-4112-8d60-7e9c2b197d71"
+                               relation="org:default"
+                               type="c:ObjectTemplateType">
+               <targetName>Hierarchy template</targetName>
+            </objectTemplateRef>
+            <action>
+               <handlerUri>http://midpoint.evolveum.com/xml/ns/public/model/action-3#synchronize</handlerUri>
+            </action>
+         </reaction>
+      </objectSynchronization>
+   </synchronization>
+</resource>

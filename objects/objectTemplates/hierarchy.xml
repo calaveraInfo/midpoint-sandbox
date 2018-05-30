@@ -1,0 +1,100 @@
+<objectTemplate 
+	xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+	xmlns:apti="http://midpoint.evolveum.com/xml/ns/public/common/api-types-3"
+	xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+	xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+	xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+	xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+	xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+	xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	oid="e711b8f7-e594-4112-8d60-7e9c2b197d71">
+   <name>Hierarchy template</name>
+   <mapping>
+   	<name>Parent org mapping</name>
+   	<authoritative>true</authoritative>
+   	<source>
+   		<path>$focus/name</path>
+   	</source>
+   	<source>
+   		<path>$focus/displayOrder</path>
+   	</source>
+   	<source>
+   		<path>$focus/riskLevel</path>
+   	</source>
+   	<expression>
+   		<assignmentTargetSearch>
+   			<targetType>c:OrgType</targetType>
+   			<filter>
+   				<q:equal>
+   					<q:path>c:name</q:path>
+	   				<expression>
+	   					<script>
+	   						<code><![CDATA[
+	   							log.info("ASSIGNMENT SEARCH. name: {}, riskLevel: {}, displayOrder: {}", name, riskLevel, displayOrder);
+	   							return displayOrder == 4 ? "root" : riskLevel.tokenize("/")[0];
+	   						]]></code>
+	   					</script>
+	   				</expression>
+				</q:equal>
+   			</filter>
+   			<createOnDemand>true</createOnDemand>
+   			<populateObject>
+   				<populateItem>
+   					<expression>
+   						<script>
+	   						<code><![CDATA[
+	   							log.info("POPULATE. name: {}, riskLevel: {}, displayOrder: {}", name, riskLevel, displayOrder);
+	   							riskLevel.tokenize("/")[0]
+	   						]]></code>
+	   					</script>
+   					</expression>
+   					<target>
+   						<path>name</path>
+   					</target>
+   				</populateItem>
+   				<populateItem>
+   					<expression>
+   						<script>
+	   						<code><![CDATA[
+	   							riskLevel.tokenize("/")[1..-1].join("/")
+	   						]]></code>
+	   					</script>
+   					</expression>
+   					<target>
+   						<path>riskLevel</path>
+   					</target>
+   				</populateItem>
+   				<populateItem>
+   					<expression>
+   						<script>
+	   						<code><![CDATA[
+	   							displayOrder - 1
+	   						]]></code>
+	   					</script>
+   					</expression>
+   					<target>
+   						<path>displayOrder</path>
+   					</target>
+   				</populateItem>
+   			</populateObject>
+   		</assignmentTargetSearch>
+   	</expression>
+   	<target>
+   		<path>assignment</path>
+   	</target>
+   	<condition>
+   		<script>
+			<code><![CDATA[
+				log.info("CONDITION. name: {}, riskLevel: {}, displayOrder: {}", name, riskLevel, displayOrder);
+				if (displayOrder != null) {
+					return displayOrder > 3;
+				} else {
+					return false;
+				}
+			]]></code>
+		</script>
+   	</condition>
+   </mapping>
+   
+</objectTemplate>
